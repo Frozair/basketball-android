@@ -5,11 +5,13 @@ package com.newrdev.basketball.data.model;
  *
  * Created by newrdev on 7/19/16.
  */
-public class Player {
+public class Player
+{
     private String name;
-    private int winCount;
+    private int wonCount;
     private int lostCount;
     private int phoneNumber;
+    private String id;
 
     public String getName() {
         return name;
@@ -19,12 +21,12 @@ public class Player {
         this.name = name;
     }
 
-    public int getWinCount() {
-        return winCount;
+    public int getWonCount() {
+        return wonCount;
     }
 
-    public void setWinCount(int winCount) {
-        this.winCount = winCount;
+    public void setWonCount(int wonCount) {
+        this.wonCount = wonCount;
     }
 
     public int getLostCount() {
@@ -43,13 +45,22 @@ public class Player {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", winCount=" + winCount +
+                ", wonCount=" + wonCount +
                 ", lostCount=" + lostCount +
                 ", phoneNumber=" + phoneNumber +
+                ", id='" + id + '\'' +
                 '}';
     }
 }
