@@ -22,3 +22,8 @@ App to keep track of pick up basketball games.
 * Game
 	* Score
 	* Time
+
+## TODO
+* Test realm repository implementation
+* Build basic UI to add/delete players and show list of players
+* Build basic UI for scoreboard
