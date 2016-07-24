@@ -26,6 +26,7 @@ public class RealmPlayerRepository implements PlayerRepository
         realmPlayer.setPhoneNumber(player.getPhoneNumber());
         realmPlayer.setWonCount(player.getWonCount());
         realmPlayer.setLostCount(player.getLostCount());
+        realmPlayer.setOrder(player.getOrder());
 
         realm.commitTransaction();
     }
@@ -43,6 +44,7 @@ public class RealmPlayerRepository implements PlayerRepository
         realmPlayer.setPhoneNumber(player.getPhoneNumber());
         realmPlayer.setWonCount(player.getWonCount());
         realmPlayer.setLostCount(player.getLostCount());
+        realmPlayer.setOrder(player.getOrder());
 
         realm.commitTransaction();
     }

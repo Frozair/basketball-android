@@ -13,6 +13,16 @@ public class Player
     private int phoneNumber;
     private String id;
 
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    private int order;
+
     public String getName() {
         return name;
     }
@@ -61,6 +71,7 @@ public class Player
                 ", lostCount=" + lostCount +
                 ", phoneNumber=" + phoneNumber +
                 ", id='" + id + '\'' +
+                ", order=" + order +
                 '}';
     }
 }

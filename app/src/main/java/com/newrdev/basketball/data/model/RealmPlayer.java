@@ -15,6 +15,16 @@ public class RealmPlayer extends RealmObject
     private int lostCount;
     private int phoneNumber;
 
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    private int order;
+
     public long getId() {
         return id;
     }
