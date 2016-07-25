@@ -1,4 +1,4 @@
-package com.newrdev.basketball.ui;
+package com.newrdev.basketball.ui.scoreboard;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,17 +12,18 @@ import com.newrdev.basketball.R;
 /**
  * Created by newrdev on 7/21/16.
  */
-public class EntryActivity extends Activity
+public class ScoreboardActivity extends Activity implements ScoreboardView
 {
-
     private static final String STATE_CURRENT_TIME = "current_time";
     private static final String STATE_COUNTING = "counting";
 
     private TextView mTextField;
     private Button mButton;
-    private boolean mCounting = false;
+    private boolean mPaused = false;
+    private boolean mNewTimer = true;
     private CountDownTimer mCountdownTimer;
     private long mCountdownTime = 300000;
+    private ScoreboardPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +31,15 @@ public class EntryActivity extends Activity
 
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState != null) {
-            mCountdownTime = savedInstanceState.getLong(STATE_CURRENT_TIME, 0);
-            mCounting = savedInstanceState.getBoolean(STATE_COUNTING, false);
+        mPresenter = new ScoreboardPresenter();
+        mPresenter.setView(this);
 
-            if(mCounting) {
-                doTimer();
-            }
-        }
+//        if (savedInstanceState != null) {
+//            mCountdownTime = savedInstanceState.getLong(STATE_CURRENT_TIME, 0);
+//            mPaused = savedInstanceState.getBoolean(STATE_COUNTING, false);
+//
+//
+//        }
 
         mTextField = (TextView)findViewById(R.id.textView);
         mTextField.setText("" + (mCountdownTime / 1000));
@@ -46,33 +48,30 @@ public class EntryActivity extends Activity
         mButton.setOnClickListener(mListener);
     }
 
-    private void doTimer()
-    {
-        mCountdownTimer = new CountDownTimer(mCountdownTime, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                mTextField.setText("" + millisUntilFinished / 1000);
-                mCountdownTime = millisUntilFinished;
-            }
-
-            public void onFinish() {
-                mTextField.setText("done!");
-            }
-        }.start();
+    @Override
+    public void updateCountdown(long seconds) {
+        mTextField.setText("" + seconds);
     }
 
     private View.OnClickListener mListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(!mCounting) {
-                doTimer();
+
+            if(mNewTimer)
+            {
+                mPresenter.setScoreboardTime(mCountdownTime);
+                mNewTimer = false;
+            }
+
+            if(!mPaused) {
+                mPresenter.startScoreboardTimer();
                 mButton.setText("Pause");
             } else {
-                mCountdownTimer.cancel();
+                mPresenter.pauseScoreboardTimer();
                 mButton.setText("Start");
             }
 
-            mCounting = !mCounting;
+            mPaused = !mPaused;
         }
     };
 
@@ -82,17 +81,6 @@ public class EntryActivity extends Activity
         super.onSaveInstanceState(outState);
         // Save our own state now
         outState.putLong(STATE_CURRENT_TIME, mCountdownTime);
-        outState.putBoolean(STATE_COUNTING, mCounting);
-    }
-
-    @Override
-    protected void onDestroy() {
-
-        if(mCountdownTimer != null) {
-            mCountdownTimer.cancel();
-            mCountdownTimer = null;
-        }
-
-        super.onDestroy();
+        outState.putBoolean(STATE_COUNTING, mPaused);
     }
 }
