@@ -19,9 +19,9 @@ public class ScoreboardPresenter implements BasePresenter, ScoreboardTimer.Liste
         mScoreboardView = scoreboardView;
     }
 
-    public void setScoreboardTime(long initialTime)
+    public void setScoreboardTime(long seconds)
     {
-        ScoreboardTimer.getInstance().setStartTime(initialTime);
+        ScoreboardTimer.getInstance().setStartTime(seconds * 1000);
     }
 
     public void startScoreboardTimer()

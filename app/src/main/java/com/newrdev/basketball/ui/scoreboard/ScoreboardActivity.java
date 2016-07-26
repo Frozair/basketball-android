@@ -2,12 +2,14 @@ package com.newrdev.basketball.ui.scoreboard;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.newrdev.basketball.R;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * Created by newrdev on 7/21/16.
@@ -21,9 +23,9 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
     private Button mButton;
     private boolean mPaused = false;
     private boolean mNewTimer = true;
-    private CountDownTimer mCountdownTimer;
-    private long mCountdownTime = 300000;
+    private long mCountdownTime = 180;
     private ScoreboardPresenter mPresenter;
+    private NumberFormat mNumberFormat = new DecimalFormat("00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
 //        }
 
         mTextField = (TextView)findViewById(R.id.textView);
-        mTextField.setText("" + (mCountdownTime / 1000));
+        mTextField.setText(convertToScoreboardFormat(mCountdownTime));
         mButton = (Button) findViewById(R.id.button);
 
         mButton.setOnClickListener(mListener);
@@ -50,7 +52,7 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
 
     @Override
     public void updateCountdown(long seconds) {
-        mTextField.setText("" + seconds);
+        mTextField.setText(convertToScoreboardFormat(seconds));
     }
 
     private View.OnClickListener mListener = new View.OnClickListener() {
@@ -82,5 +84,13 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
         // Save our own state now
         outState.putLong(STATE_CURRENT_TIME, mCountdownTime);
         outState.putBoolean(STATE_COUNTING, mPaused);
+    }
+
+    private String convertToScoreboardFormat(long time)
+    {
+        long minutes = time / 60;
+        long seconds = time % 60;
+
+        return mNumberFormat.format(minutes) + ":" + mNumberFormat.format(seconds);
     }
 }
