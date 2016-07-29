@@ -8,13 +8,13 @@
     android:id="@+id/constraintLayout">
 
     <android.support.constraint.Guideline
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="464dp"
         android:id="@+id/guideline"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="512dp"
+        tools:layout_editor_absoluteX="730dp"
         tools:layout_editor_absoluteY="0dp"
-        app:layout_constraintGuide_Percent="75" />
+        app:layout_constraintGuide_Percent="76" />
 
     <android.support.constraint.Guideline
         android:layout_width="0dp"
@@ -22,15 +22,15 @@
         android:id="@+id/guideline2"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="189dp"
-        app:layout_constraintGuide_Percent="56" />
+        tools:layout_editor_absoluteY="213dp"
+        app:layout_constraintGuide_Percent="46" />
 
     <android.support.constraint.Guideline
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/guideline3"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="341dp"
+        tools:layout_editor_absoluteX="480dp"
         tools:layout_editor_absoluteY="0dp"
         app:layout_constraintGuide_Percent="50" />
 
@@ -39,22 +39,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/guideline4"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="170dp"
+        tools:layout_editor_absoluteX="240dp"
         tools:layout_editor_absoluteY="0dp"
         app:layout_constraintGuide_Percent="25" />
 
     <com.newrdev.basketball.ui.scoreboard.ScoreboardTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="80sp"
+        android:textSize="60sp"
         android:textColor="#FFF"
         android:text="00"
-        android:id="@+id/homeTextView"
+        android:id="@+id/homeScore"
         app:layout_constraintLeft_toLeftOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/guideline4"
-        android:layout_marginEnd="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/homeText"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/guideline4" />
 
     <Button
         android:layout_width="wrap_content"
@@ -62,23 +61,21 @@
         android:text="-"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:id="@+id/homeMinusBtn"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/homeTextView"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/homeTextView" />
+        app:layout_constraintTop_toTopOf="@+id/homeScore"
+        app:layout_constraintRight_toLeftOf="@+id/homeScore"
+        app:layout_constraintBottom_toBottomOf="@+id/homeScore"
+        android:textColor="@android:color/holo_red_dark" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="+"
-        android:id="@+id/homeAddBtn"
-        app:layout_constraintLeft_toRightOf="@+id/homeTextView"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/homeTextView" />
+        android:id="@+id/homePlusBtn"
+        app:layout_constraintLeft_toRightOf="@+id/homeScore"
+        app:layout_constraintTop_toTopOf="@+id/homeScore"
+        app:layout_constraintBottom_toBottomOf="@+id/homeScore"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,23 +84,21 @@
         android:text="Home"
         android:id="@+id/homeText"
         app:layout_constraintLeft_toLeftOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/homeTextView"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/guideline4"
-        android:layout_marginEnd="16dp" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        android:layout_marginTop="15dp"
+        app:layout_constraintRight_toLeftOf="@+id/guideline4" />
 
     <com.newrdev.basketball.ui.scoreboard.ScoreboardTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="80sp"
+        android:textSize="60sp"
         android:textColor="#FFF"
         android:text="00"
-        android:id="@+id/visitorTextView"
+        android:id="@+id/visitorScore"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/guideline"
-        android:layout_marginEnd="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/visitorText"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
 
     <Button
         android:layout_width="wrap_content"
@@ -111,11 +106,10 @@
         android:text="-"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:id="@+id/visitorMinusBtn"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/visitorTextView"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/visitorTextView" />
+        app:layout_constraintTop_toTopOf="@+id/visitorScore"
+        app:layout_constraintRight_toLeftOf="@+id/visitorScore"
+        app:layout_constraintBottom_toBottomOf="@+id/visitorScore"
+        android:textColor="@android:color/holo_red_dark" />
 
     <Button
         android:layout_width="wrap_content"
@@ -123,11 +117,10 @@
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="+"
         android:id="@+id/visitorPlusBtn"
-        app:layout_constraintLeft_toRightOf="@+id/visitorTextView"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/visitorTextView" />
+        app:layout_constraintLeft_toRightOf="@+id/visitorScore"
+        app:layout_constraintTop_toTopOf="@+id/visitorScore"
+        app:layout_constraintBottom_toBottomOf="@+id/visitorScore"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -136,32 +129,31 @@
         android:text="Visitor"
         android:id="@+id/visitorText"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/visitorTextView"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/guideline"
-        android:layout_marginEnd="16dp" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        android:layout_marginTop="15dp"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
 
     <com.newrdev.basketball.ui.scoreboard.ScoreboardTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
+        android:textSize="80sp"
         android:textColor="#FE0000"
         android:text="10:00"
-        android:id="@+id/textView"
+        android:id="@+id/scoreboardTimer"
         tools:ignore="MissingConstraints"
         app:layout_constraintLeft_toLeftOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintRight_toLeftOf="@+id/guideline3" />
+        app:layout_constraintRight_toLeftOf="@+id/guideline3"
+        app:layout_constraintBottom_toTopOf="@+id/button" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Start"
         android:id="@+id/button"
         app:layout_constraintLeft_toLeftOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginTop="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/guideline3" />
+        app:layout_constraintRight_toLeftOf="@+id/guideline3"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        android:layout_marginBottom="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>

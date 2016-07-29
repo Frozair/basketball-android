@@ -19,7 +19,9 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
     private static final String STATE_CURRENT_TIME = "current_time";
     private static final String STATE_COUNTING = "counting";
 
-    private TextView mTextField;
+    private TextView mScoreboardTimer;
+    private TextView mHomeScore;
+    private TextView mVisitorScore;
     private Button mButton;
     private boolean mPaused = false;
     private boolean mNewTimer = true;
@@ -43,16 +45,25 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
 //
 //        }
 
-        mTextField = (TextView)findViewById(R.id.textView);
-        mTextField.setText(convertToScoreboardFormat(mCountdownTime));
+        mHomeScore = (TextView)findViewById(R.id.homeScore);
+        mVisitorScore = (TextView)findViewById(R.id.visitorScore);
+
+        mScoreboardTimer = (TextView)findViewById(R.id.scoreboardTimer);
+        mScoreboardTimer.setText(convertToScoreboardFormat(mCountdownTime));
         mButton = (Button) findViewById(R.id.button);
+
+        // Set button click listeners
+        (findViewById(R.id.homeMinusBtn)).setOnClickListener(mScoreClickListener);
+        (findViewById(R.id.homePlusBtn)).setOnClickListener(mScoreClickListener);
+        (findViewById(R.id.visitorMinusBtn)).setOnClickListener(mScoreClickListener);
+        (findViewById(R.id.visitorPlusBtn)).setOnClickListener(mScoreClickListener);
 
         mButton.setOnClickListener(mListener);
     }
 
     @Override
     public void updateCountdown(long seconds) {
-        mTextField.setText(convertToScoreboardFormat(seconds));
+        mScoreboardTimer.setText(convertToScoreboardFormat(seconds));
     }
 
     private View.OnClickListener mListener = new View.OnClickListener() {
@@ -74,6 +85,64 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
             }
 
             mPaused = !mPaused;
+        }
+    };
+
+    private View.OnClickListener mScoreClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            long score = 0;
+
+            switch(v.getId())
+            {
+                case R.id.homeMinusBtn:
+                    score = Long.valueOf(mHomeScore.getText().toString());
+
+                    if(score > 0)
+                    {
+                        score--;
+                    }
+
+                    mHomeScore.setText(mNumberFormat.format(score));
+
+                    break;
+
+                case R.id.homePlusBtn:
+                    score = Long.valueOf(mHomeScore.getText().toString());
+
+                    if(score < 99)
+                    {
+                        score++;
+                    }
+
+                    mHomeScore.setText(mNumberFormat.format(score));
+
+                    break;
+
+                case R.id.visitorMinusBtn:
+                    score = Long.valueOf(mVisitorScore.getText().toString());
+
+                    if(score > 0)
+                    {
+                        score--;
+                    }
+
+                    mVisitorScore.setText(mNumberFormat.format(score));
+
+                    break;
+
+                case R.id.visitorPlusBtn:
+                    score = Long.valueOf(mVisitorScore.getText().toString());
+
+                    if(score < 99)
+                    {
+                        score++;
+                    }
+
+                    mVisitorScore.setText(mNumberFormat.format(score));
+
+                    break;
+            }
         }
     };
 
