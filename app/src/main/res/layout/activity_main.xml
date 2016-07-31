@@ -5,7 +5,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/constraintLayout">
+    android:id="@+id/constraintLayout"
+    android:background="@android:color/black">
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -61,10 +62,10 @@
         android:text="-"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:id="@+id/homeMinusBtn"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintTop_toTopOf="@+id/homeScore"
         app:layout_constraintRight_toLeftOf="@+id/homeScore"
-        app:layout_constraintBottom_toBottomOf="@+id/homeScore"
-        android:textColor="@android:color/holo_red_dark" />
+        app:layout_constraintBottom_toBottomOf="@+id/homeScore" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,10 +73,10 @@
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="+"
         android:id="@+id/homePlusBtn"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintLeft_toRightOf="@+id/homeScore"
         app:layout_constraintTop_toTopOf="@+id/homeScore"
-        app:layout_constraintBottom_toBottomOf="@+id/homeScore"
-        android:textColor="@color/colorPrimaryDark" />
+        app:layout_constraintBottom_toBottomOf="@+id/homeScore" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,10 +107,10 @@
         android:text="-"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:id="@+id/visitorMinusBtn"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintTop_toTopOf="@+id/visitorScore"
         app:layout_constraintRight_toLeftOf="@+id/visitorScore"
-        app:layout_constraintBottom_toBottomOf="@+id/visitorScore"
-        android:textColor="@android:color/holo_red_dark" />
+        app:layout_constraintBottom_toBottomOf="@+id/visitorScore" />
 
     <Button
         android:layout_width="wrap_content"
@@ -117,10 +118,10 @@
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="+"
         android:id="@+id/visitorPlusBtn"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintLeft_toRightOf="@+id/visitorScore"
         app:layout_constraintTop_toTopOf="@+id/visitorScore"
-        app:layout_constraintBottom_toBottomOf="@+id/visitorScore"
-        android:textColor="@color/colorPrimaryDark" />
+        app:layout_constraintBottom_toBottomOf="@+id/visitorScore" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,7 +144,8 @@
         tools:ignore="MissingConstraints"
         app:layout_constraintLeft_toLeftOf="@+id/guideline3"
         app:layout_constraintRight_toLeftOf="@+id/guideline3"
-        app:layout_constraintBottom_toTopOf="@+id/button" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:background="@color/backgroundGray" />
 
     <Button
         android:layout_width="wrap_content"
