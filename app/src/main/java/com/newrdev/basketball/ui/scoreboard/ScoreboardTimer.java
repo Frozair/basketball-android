@@ -71,7 +71,7 @@ public class ScoreboardTimer
     public void pause()
     {
         mCounting = false;
-        mCountdownTimer.cancel();
+        release();
     }
 
     public void stop()
@@ -79,7 +79,15 @@ public class ScoreboardTimer
         mCounting = false;
         mStartTime = 0;
         mCurrentTime = 0;
-        mCountdownTimer.cancel();
+        release();
+    }
+
+    public void update(long time)
+    {
+        stop();
+        mStartTime = time;
+        mCurrentTime = time;
+        start();
     }
 
     public void release()
