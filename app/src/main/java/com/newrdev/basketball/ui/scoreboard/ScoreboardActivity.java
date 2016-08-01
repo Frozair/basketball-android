@@ -11,6 +11,10 @@ import com.newrdev.basketball.R;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by newrdev on 7/21/16.
  */
@@ -19,13 +23,13 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
     private static final String STATE_CURRENT_TIME = "current_time";
     private static final String STATE_COUNTING = "counting";
 
-    private TextView mScoreboardTimer;
+    @BindView(R.id.scoreboardTimer) TextView mScoreboardTimer;
     private TextView mHomeScore;
     private TextView mVisitorScore;
     private Button mButton;
     private boolean mPaused = false;
     private boolean mNewTimer = true;
-    private long mCountdownTime = 180;
+    private long mCountdownTime = 600;
     private ScoreboardPresenter mPresenter;
     private NumberFormat mNumberFormat = new DecimalFormat("00");
 
@@ -35,28 +39,20 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
 
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         mPresenter = new ScoreboardPresenter();
         mPresenter.setView(this);
 
-//        if (savedInstanceState != null) {
-//            mCountdownTime = savedInstanceState.getLong(STATE_CURRENT_TIME, 0);
-//            mPaused = savedInstanceState.getBoolean(STATE_COUNTING, false);
-//
-//
-//        }
+        if (savedInstanceState != null) {
+            mCountdownTime = savedInstanceState.getLong(STATE_CURRENT_TIME, 0);
+        }
 
         mHomeScore = (TextView)findViewById(R.id.homeScore);
         mVisitorScore = (TextView)findViewById(R.id.visitorScore);
 
-        mScoreboardTimer = (TextView)findViewById(R.id.scoreboardTimer);
         mScoreboardTimer.setText(convertToScoreboardFormat(mCountdownTime));
         mButton = (Button) findViewById(R.id.button);
-
-        // Set button click listeners
-        (findViewById(R.id.homeMinusBtn)).setOnClickListener(mScoreClickListener);
-        (findViewById(R.id.homePlusBtn)).setOnClickListener(mScoreClickListener);
-        (findViewById(R.id.visitorMinusBtn)).setOnClickListener(mScoreClickListener);
-        (findViewById(R.id.visitorPlusBtn)).setOnClickListener(mScoreClickListener);
 
         mButton.setOnClickListener(mListener);
     }
@@ -88,63 +84,74 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
         }
     };
 
-    private View.OnClickListener mScoreClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            long score = 0;
+    @OnClick({R.id.homeMinusBtn, R.id.homePlusBtn, R.id.visitorMinusBtn, R.id.visitorPlusBtn})
+    public void updateScore(View v) {
+        long score = 0;
 
-            switch(v.getId())
-            {
-                case R.id.homeMinusBtn:
-                    score = Long.valueOf(mHomeScore.getText().toString());
+        switch(v.getId())
+        {
+            case R.id.homeMinusBtn:
+                score = Long.valueOf(mHomeScore.getText().toString());
 
-                    if(score > 0)
-                    {
-                        score--;
-                    }
+                if(score > 0)
+                {
+                    score--;
+                }
 
-                    mHomeScore.setText(mNumberFormat.format(score));
+                mHomeScore.setText(mNumberFormat.format(score));
 
-                    break;
+                break;
 
-                case R.id.homePlusBtn:
-                    score = Long.valueOf(mHomeScore.getText().toString());
+            case R.id.homePlusBtn:
+                score = Long.valueOf(mHomeScore.getText().toString());
 
-                    if(score < 99)
-                    {
-                        score++;
-                    }
+                if(score < 99)
+                {
+                    score++;
+                }
 
-                    mHomeScore.setText(mNumberFormat.format(score));
+                mHomeScore.setText(mNumberFormat.format(score));
 
-                    break;
+                break;
 
-                case R.id.visitorMinusBtn:
-                    score = Long.valueOf(mVisitorScore.getText().toString());
+            case R.id.visitorMinusBtn:
+                score = Long.valueOf(mVisitorScore.getText().toString());
 
-                    if(score > 0)
-                    {
-                        score--;
-                    }
+                if(score > 0)
+                {
+                    score--;
+                }
 
-                    mVisitorScore.setText(mNumberFormat.format(score));
+                mVisitorScore.setText(mNumberFormat.format(score));
 
-                    break;
+                break;
 
-                case R.id.visitorPlusBtn:
-                    score = Long.valueOf(mVisitorScore.getText().toString());
+            case R.id.visitorPlusBtn:
+                score = Long.valueOf(mVisitorScore.getText().toString());
 
-                    if(score < 99)
-                    {
-                        score++;
-                    }
+                if(score < 99)
+                {
+                    score++;
+                }
 
-                    mVisitorScore.setText(mNumberFormat.format(score));
+                mVisitorScore.setText(mNumberFormat.format(score));
 
-                    break;
-            }
+                break;
         }
-    };
+    }
+
+    @OnClick({R.id.hourUp, R.id.hourDown})
+    public void updateHour(View v)
+    {
+        if(v.getId() == R.id.hourUp)
+        {
+            mCountdownTime += ( mCountdownTime < 5940 ? 60 : 0);
+        } else {
+            mCountdownTime -= ( mCountdownTime >= 60 ? 60 : 0);
+        }
+
+        mPresenter.setScoreboardTime(mCountdownTime);
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -160,6 +167,7 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
         long minutes = time / 60;
         long seconds = time % 60;
 
+        mCountdownTime = time;
         return mNumberFormat.format(minutes) + ":" + mNumberFormat.format(seconds);
     }
 }

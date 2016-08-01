@@ -21,7 +21,7 @@ public class ScoreboardPresenter implements BasePresenter, ScoreboardTimer.Liste
 
     public void setScoreboardTime(long seconds)
     {
-        ScoreboardTimer.getInstance().setStartTime(seconds * 1000);
+        ScoreboardTimer.getInstance().update(seconds * 1000);
     }
 
     public void startScoreboardTimer()
