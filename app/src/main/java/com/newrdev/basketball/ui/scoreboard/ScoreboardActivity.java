@@ -150,7 +150,7 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
             mCountdownTime -= ( mCountdownTime >= 60 ? 60 : 0);
         }
 
-        mPresenter.setScoreboardTime(mCountdownTime);
+        mPresenter.updateScoreboardTimer(mCountdownTime);
     }
 
     @Override
