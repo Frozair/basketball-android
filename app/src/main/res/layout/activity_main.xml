@@ -176,5 +176,23 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/scoreboardTimer" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondsUp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:background="@drawable/arrow_up"
+        app:layout_constraintLeft_toRightOf="@+id/scoreboardTimer"
+        app:layout_constraintTop_toTopOf="@+id/scoreboardTimer" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondsDown"
+        app:layout_constraintLeft_toLeftOf="@+id/secondsUp"
+        app:layout_constraintBottom_toBottomOf="@+id/scoreboardTimer"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:background="@drawable/arrow_down" />
+
 
 </android.support.constraint.ConstraintLayout>
