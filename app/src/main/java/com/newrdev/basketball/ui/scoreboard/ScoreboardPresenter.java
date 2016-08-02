@@ -30,7 +30,7 @@ public class ScoreboardPresenter implements BasePresenter, ScoreboardTimer.Liste
     }
 
     public void updateScoreboardTimer(long seconds) {
-        ScoreboardTimer.getInstance().update(seconds);
+        ScoreboardTimer.getInstance().update(seconds * 1000);
     }
 
     public void pauseScoreboardTimer()

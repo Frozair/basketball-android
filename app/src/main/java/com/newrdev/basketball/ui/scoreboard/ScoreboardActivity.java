@@ -143,14 +143,33 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
     @OnClick({R.id.hourUp, R.id.hourDown})
     public void updateHour(View v)
     {
+        long currentClockMinutes = mCountdownTime / 60;
         if(v.getId() == R.id.hourUp)
         {
-            mCountdownTime += ( mCountdownTime < 5940 ? 60 : 0);
+            mCountdownTime += ( currentClockMinutes < 99 ? 60 : 0);
         } else {
-            mCountdownTime -= ( mCountdownTime >= 60 ? 60 : 0);
+            mCountdownTime -= ( currentClockMinutes >= 1 ? 60 : 0);
         }
 
         mPresenter.updateScoreboardTimer(mCountdownTime);
+        updateCountdown(mCountdownTime);
+    }
+
+    @OnClick({R.id.secondsDown, R.id.secondsUp})
+    public void updateSeconds(View v)
+    {
+        System.out.println("Current time:" + mCountdownTime);
+        if(v.getId() == R.id.secondsUp)
+        {
+            long maxClockSeconds = (99 * 60) + 59;
+            mCountdownTime += ( mCountdownTime < maxClockSeconds ? 1 : 0);
+        } else {
+            mCountdownTime -= ( mCountdownTime > 0 ? 1 : 0);
+        }
+        System.out.println("After calc time:" + mCountdownTime);
+
+        mPresenter.updateScoreboardTimer(mCountdownTime);
+        updateCountdown(mCountdownTime);
     }
 
     @Override
