@@ -158,7 +158,6 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
     @OnClick({R.id.secondsDown, R.id.secondsUp})
     public void updateSeconds(View v)
     {
-        System.out.println("Current time:" + mCountdownTime);
         if(v.getId() == R.id.secondsUp)
         {
             long maxClockSeconds = (99 * 60) + 59;
@@ -166,7 +165,6 @@ public class ScoreboardActivity extends Activity implements ScoreboardView
         } else {
             mCountdownTime -= ( mCountdownTime > 0 ? 1 : 0);
         }
-        System.out.println("After calc time:" + mCountdownTime);
 
         mPresenter.updateScoreboardTimer(mCountdownTime);
         updateCountdown(mCountdownTime);

@@ -84,9 +84,11 @@ public class ScoreboardTimer
 
     public void update(long time)
     {
-        stop();
         mCurrentTime = time;
-        start();
+        if(mCounting) {
+            pause();
+            start();
+        }
     }
 
     public void release()
